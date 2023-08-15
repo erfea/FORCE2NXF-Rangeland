@@ -16,7 +16,7 @@ git clone https://github.com/CRC-FONDA/FORCE2NXF-Rangeland.git
 cd FORCE2NXF-Rangeland/inputdata/download/
 mkdir -p meta
 # force-level1-landsat -u -s "TM,ETM" 
-force-level1-landsat -s "TM,ETM" -d "$start,$end" -c 0,70 ../vector/aoi.gpkg data/ -q queue.txt 
+force-level1-landsat search -s "TM,ETM" -d "$start,$end" -c 0,70 -- download -q queue.txt ../vector/aoi.gpkg data/  
 cd ..
 wget -O wvp-global.tar.gz https://zenodo.org/record/4468701/files/wvp-global.tar.gz?download=1
 tar -xzf wvp-global.tar.gz --directory wvdb/
