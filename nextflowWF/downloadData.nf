@@ -1,7 +1,7 @@
 nextflow.enable.dsl=2
 
 params.downloadData = false
-params.sensors_level1 = "LT04,LT05,LE07,S2A"
+params.sensors_level1 = "TM,ETM,OLI"
 params.forceVer = "latest"
 
 process downloadData{
@@ -19,10 +19,10 @@ process downloadData{
     path 'data/*/*' into data
 
     """
-    mkdir meta
-    force-level1-csd -u -s $params.sensors_level1 meta
+    # mkdir meta
+    # force-level1-csd -u -s $params.sensors_level1 meta
     mkdir data
-    force-level1-csd -s $params.sensors_level1 -d $timeRange -c 0,70 meta/ data/ queue.txt $aoi
+    force-level1-landsat search -s $params.sensors_level1 -d $timeRange -c 0,70 --download -q queue.txt $aoi data/ 
     """
 
 }
